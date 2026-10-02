@@ -4,26 +4,41 @@
 
 Customer 360 & Revenue Growth Analytics
 
-## Skills demonstrated
+## Dashboard Pages
 
-- End-to-end analytics delivery
+- Executive Overview
+- Customer & Retention
+- Acquisition & Product Performance
+- Forecasting & Experimentation
+- Marketing Performance
+
+## Skills Demonstrated
+
 - Customer analytics
 - Revenue analysis
-- Marketing performance measurement
+- Retention analysis
+- Acquisition analysis
+- Product performance
+- Forecasting
+- Experimentation
+- Marketing analytics
 - KPI development
-- DAX measures
+- DAX
 - Semantic modelling
 - Power BI dashboard engineering
-- PBIP / PBIR / TMDL development
-- Visual Studio Code workflow
-- Git source control
+- PBIP
+- PBIR
+- TMDL
+- Python
+- SQL
+- Git
 - Automated QA
 
-## Business value
+## Business Value
 
-The solution converts customer, revenue, and campaign-level data into decision-support reporting that enables users to compare performance, identify efficient channels, and monitor headline commercial KPIs.
+The project converts customer, revenue and marketing data into decision-support reporting that enables users to monitor commercial KPIs, compare channels, analyse retention and identify growth opportunities.
 
-## Relevant roles
+## Relevant Roles
 
 - Data Analyst
 - Business Intelligence Analyst

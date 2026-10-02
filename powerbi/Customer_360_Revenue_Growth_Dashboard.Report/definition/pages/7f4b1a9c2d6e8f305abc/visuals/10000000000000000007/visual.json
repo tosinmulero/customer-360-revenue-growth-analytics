@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "10000000000000000007",
   "position": {
-    "x": 30,
-    "y": 220,
+    "x": 30.874889026616859,
+    "y": 281.99065310976732,
     "z": 1200,
     "height": 240,
     "width": 600,
@@ -237,5 +237,37 @@
       "subTitle": []
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "6922d930850a515035c2",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Marketing Performance"
+              }
+            },
+            "Property": "Campaign"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "62bf2cd1da1860d23a50",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Marketing Performance"
+              }
+            },
+            "Property": "Total Marketing Revenue"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "10000000000000000009",
   "position": {
-    "x": 30,
-    "y": 480,
+    "x": 30.874889026616859,
+    "y": 539.28139499824113,
     "z": 1300,
     "height": 210,
     "width": 820,
@@ -361,5 +361,93 @@
       "subTitle": []
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "643ad545bcb2ab20c193",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Marketing Performance"
+              }
+            },
+            "Property": "Campaign"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "0080dea252460e402cb0",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Marketing Performance"
+              }
+            },
+            "Property": "Total Marketing Spend"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a4e27cd6d0c1b7780688",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Marketing Performance"
+              }
+            },
+            "Property": "Total Marketing Revenue"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "598a19a5ea3780e90a0c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Marketing Performance"
+              }
+            },
+            "Property": "Marketing CPA"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "41b5502020905ca4c5cb",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Marketing Performance"
+              }
+            },
+            "Property": "Marketing ROAS"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a8a72fd9e16660009be3",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Marketing Performance"
+              }
+            },
+            "Property": "Marketing ROI %"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

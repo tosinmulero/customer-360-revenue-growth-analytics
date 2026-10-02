@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "10000000000000000006",
   "position": {
-    "x": 945,
-    "y": 100,
+    "x": 944.77160421447593,
+    "y": 100.85797082028175,
     "z": 1103,
-    "height": 100,
-    "width": 285,
+    "height": 181.13268228948559,
+    "width": 286.10730497998293,
     "tabOrder": 5
   },
   "visual": {
@@ -234,5 +234,23 @@
       "subTitle": []
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "28678983a8275ac8842e",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Marketing Performance"
+              }
+            },
+            "Property": "Marketing CPA"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

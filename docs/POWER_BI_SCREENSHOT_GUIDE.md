@@ -1,19 +1,9 @@
 # Power BI Screenshot Guide
 
-Save final screenshots under `images/powerbi/`.
+Screenshots are stored under `images/powerbi/`.
 
-Recommended files:
-
-- `01_executive_overview.png`
-- `02_customer_analysis.png`
-- `03_revenue_analysis.png`
-- `04_marketing_performance.png`
-
-Before capture:
-
-- maximize Power BI;
-- refresh the report;
-- clear accidental selections;
-- hide unnecessary panes;
-- verify there are no visual errors;
-- use a consistent zoom level.
+- `01_executive_overview.png` - Executive Overview
+- `02_customer_retention.png` - Customer & Retention
+- `03_acquisition_product_performance.png` - Acquisition & Product Performance
+- `04_forecasting_experimentation.png` - Forecasting & Experimentation
+- `05_marketing_performance.png` - Marketing Performance

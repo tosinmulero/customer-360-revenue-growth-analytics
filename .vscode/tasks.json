@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Customer 360 - Stage 6 Publish",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/scripts/stage6_publish.py"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Customer 360 - Open Power BI",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "Start-Process \"C:\\Users\\OLUWATOSIN OLUWASEUN\\Downloads\\customer-360-revenue-growth-analytics\\powerbi\\Customer_360_Revenue_Growth_Dashboard.pbip\""
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

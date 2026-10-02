@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "10000000000000000005",
   "position": {
-    "x": 640,
-    "y": 100,
+    "x": 640.139365818523,
+    "y": 100.85797082028175,
     "z": 1102,
-    "height": 100,
-    "width": 285,
+    "height": 181.13268228948559,
+    "width": 284.04897904487513,
     "tabOrder": 4
   },
   "visual": {
@@ -234,5 +234,23 @@
       "subTitle": []
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "2a4e2f1159e30427e452",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Marketing Performance"
+              }
+            },
+            "Property": "Marketing ROAS"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

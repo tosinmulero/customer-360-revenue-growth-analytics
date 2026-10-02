@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "10000000000000000004",
   "position": {
-    "x": 335,
-    "y": 100,
+    "x": 335.50712742256991,
+    "y": 100.85797082028175,
     "z": 1101,
-    "height": 100,
-    "width": 285,
+    "height": 181.13268228948559,
+    "width": 284.04897904487513,
     "tabOrder": 3
   },
   "visual": {
@@ -234,5 +234,23 @@
       "subTitle": []
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "6c54e4816ce9782ed90b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Marketing Performance"
+              }
+            },
+            "Property": "Total Marketing Spend"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

@@ -1,0 +1,6 @@
+{
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "python.terminal.activateEnvironment": true,
+  "terminal.integrated.cwd": "${workspaceFolder}"
+}

@@ -3772,3 +3772,578 @@ print("ZIP:", zip_path)
 print("Python syntax validation: PASS")
 print("ASCII-only:", all(b < 128 for b in script_path.read_bytes()))
 print("SHA256:", sha)
+
+
+code = r'''
+from __future__ import annotations
+import json, os, re, shutil, subprocess, sys, time
+from datetime import datetime
+from pathlib import Path
+
+PROJECT_NAME = "customer-360-revenue-growth-analytics"
+REPO_NAME = PROJECT_NAME
+REPO_VISIBILITY = "private"
+REPO_DESCRIPTION = "Customer 360 and Revenue Growth Analytics portfolio built with Power BI, DAX, PBIP, PBIR, TMDL, Python, SQL and Git."
+
+def run(cmd, cwd=None, timeout=300, capture=True):
+    print("$", " ".join(map(str, cmd)))
+    try:
+        p = subprocess.run(
+            [str(x) for x in cmd],
+            cwd=str(cwd) if cwd else None,
+            text=True,
+            capture_output=capture,
+            timeout=timeout,
+            shell=False,
+        )
+        if capture:
+            if p.stdout.strip():
+                print(p.stdout.strip())
+            if p.stderr.strip():
+                print(p.stderr.strip())
+        return p.returncode, (p.stdout.strip() if capture else ""), (p.stderr.strip() if capture else "")
+    except Exception as e:
+        print("[ERROR]", e)
+        return 999, "", str(e)
+
+def write_text(path: Path, text: str):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="utf-8", newline="\n")
+
+def find_root():
+    cwd = Path.cwd()
+    if (cwd / "powerbi").exists():
+        return cwd
+    d = Path.home() / "Downloads" / PROJECT_NAME
+    if d.exists():
+        return d
+    raise SystemExit(f"Project not found. Open {PROJECT_NAME} in VS Code and run again.")
+
+def valid_json(path: Path):
+    try:
+        json.loads(path.read_text(encoding="utf-8-sig"))
+        return True
+    except Exception:
+        return False
+
+def slug(s: str):
+    s = re.sub(r"[^A-Za-z0-9]+", "_", s.strip()).strip("_").lower()
+    return s or "page"
+
+root = find_root()
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+powerbi = root / "powerbi"
+docs = root / "docs"
+qa = root / "reports" / "qa"
+images = root / "images" / "powerbi"
+scripts = root / "scripts"
+vscode = root / ".vscode"
+backups = root / "backups"
+for p in [docs, qa, images, scripts, vscode, backups]:
+    p.mkdir(parents=True, exist_ok=True)
+
+log_path = qa / f"stage6_{timestamp}.log"
+status_path = qa / "FINAL_STAGE6_STATUS.txt"
+warnings, errors = [], []
+
+def log(level, msg):
+    line = f"[{level}] {msg}"
+    print(line)
+    with log_path.open("a", encoding="utf-8", newline="\n") as f:
+        f.write(line + "\n")
+    if level == "WARNING": warnings.append(msg)
+    if level == "ERROR": errors.append(msg)
+
+print("\n" + "="*60)
+print(" CUSTOMER 360 - STAGE 6 VS CODE DELIVERY")
+print("="*60 + "\n")
+log("INFO", f"Project root: {root}")
+
+# 1. Validate finished Power BI project
+pbips = list(powerbi.glob("*.pbip"))
+reports = list(powerbi.glob("*.Report"))
+models = list(powerbi.glob("*.SemanticModel"))
+if not pbips or not reports or not models:
+    raise SystemExit("Missing PBIP, Report, or SemanticModel component.")
+pbip, report_dir, model_dir = pbips[0], reports[0], models[0]
+pages_dir = report_dir / "definition" / "pages"
+pages_json = pages_dir / "pages.json"
+if not pages_dir.exists():
+    raise SystemExit("PBIR pages directory missing.")
+
+json_like = [p for p in powerbi.rglob("*") if p.is_file() and p.suffix.lower() in {".json",".pbip",".pbir"}]
+bad = [p for p in json_like if not valid_json(p)]
+if bad:
+    for p in bad: log("ERROR", f"Invalid JSON: {p}")
+    raise SystemExit("Stage 6 stopped because Power BI JSON is invalid.")
+log("OK", f"Power BI JSON valid: {len(json_like)} files")
+
+# 2. Page inventory in report order
+page_map = {}
+for pf in pages_dir.rglob("page.json"):
+    try:
+        obj = json.loads(pf.read_text(encoding="utf-8-sig"))
+        page_map[str(obj.get("name", pf.parent.name))] = str(obj.get("displayName") or obj.get("name") or pf.parent.name)
+    except Exception:
+        pass
+page_ids = []
+if pages_json.exists() and valid_json(pages_json):
+    try:
+        meta = json.loads(pages_json.read_text(encoding="utf-8-sig"))
+        page_ids = [str(x) for x in meta.get("pageOrder", [])]
+    except Exception:
+        pass
+ordered_pages = [page_map[i] for i in page_ids if i in page_map]
+for k,v in page_map.items():
+    if v not in ordered_pages: ordered_pages.append(v)
+log("OK", f"Pages detected: {len(ordered_pages)}")
+for x in ordered_pages: log("INFO", f"Page: {x}")
+
+# 3. Final docs
+page_lines = "\n".join(f"- {x}" for x in ordered_pages)
+readme = f"""# Customer 360 & Revenue Growth Analytics
+
+## Overview
+End-to-end business intelligence portfolio project covering customer behaviour, retention, acquisition, product performance, forecasting, experimentation and marketing efficiency.
+
+The solution uses Power BI Project (PBIP), PBIR report source, a TMDL semantic model, Python, SQL, DAX, Visual Studio Code and Git.
+
+## Dashboard Pages
+{page_lines}
+
+## Marketing Performance
+The marketing page uses synthetic campaign data for portfolio demonstration.
+
+- Total marketing spend: GBP 40,000
+- Attributed revenue: GBP 166,000
+- Marketing profit: GBP 126,000
+- Acquisitions: 2,430
+- Overall ROAS: 4.15x
+- Blended CPA: GBP 16.46
+- Marketing ROI: 315.0%
+
+## Design System
+- Executive: blue
+- Customer and retention: purple
+- Revenue: green
+- Marketing: orange
+- Product: pink
+- Channel: cyan
+
+## Technology
+- Power BI
+- DAX
+- PBIP / PBIR / TMDL
+- Python
+- SQL
+- Power Query
+- Git and GitHub
+- Visual Studio Code
+
+## Quality Assurance
+Automated checks validate Power BI JSON, project structure, source files, documentation and Git state. QA outputs are stored in `reports/qa/`.
+
+<!-- DASHBOARD_GALLERY_START -->
+## Dashboard Gallery
+
+Final screenshots are stored in `images/powerbi/`.
+
+<!-- DASHBOARD_GALLERY_END -->
+
+## Author
+Oluwatosin Oluwaseun Mulero
+
+Data Analyst | Data Scientist
+"""
+write_text(root / "README.md", readme)
+
+write_text(docs / "RECRUITER_PROJECT_SUMMARY.md", f"""# Recruiter Project Summary
+
+## Project
+Customer 360 & Revenue Growth Analytics
+
+## Dashboard Pages
+{page_lines}
+
+## Skills Demonstrated
+- Customer analytics
+- Revenue analysis
+- Retention analysis
+- Acquisition analysis
+- Product performance
+- Forecasting and experimentation
+- Marketing performance measurement
+- KPI development
+- DAX
+- Semantic modelling
+- Power BI dashboard engineering
+- PBIP / PBIR / TMDL
+- Python and SQL
+- Git source control
+- Automated QA
+""")
+
+write_text(docs / "GITHUB_PUBLISH_CHECKLIST.md", """# GitHub Publish Checklist
+- [x] PBIP detected
+- [x] PBIR detected
+- [x] Semantic model detected
+- [x] JSON validation passed
+- [x] README finalized
+- [x] Recruiter summary created
+- [x] Screenshot folder created
+- [x] VS Code project tasks created
+- [ ] Screenshots visually verified
+- [ ] GitHub remote/push verified
+""")
+
+write_text(docs / "POWER_BI_SCREENSHOT_GUIDE.md", "\n".join(
+    ["# Power BI Screenshot Guide", "", "Save screenshots in `images/powerbi/`.", ""]
+    + [f"- `{i:02d}_{slug(name)}.png` - {name}" for i,name in enumerate(ordered_pages,1)]
+) + "\n")
+log("OK", "Portfolio documentation created/updated")
+
+# 4. VS Code workspace automation
+tasks = {
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Customer 360 - Stage 6 Publish",
+            "type": "shell",
+            "command": "python",
+            "args": ["${workspaceFolder}/scripts/stage6_publish.py"],
+            "group": {"kind": "build", "isDefault": True},
+            "problemMatcher": []
+        },
+        {
+            "label": "Customer 360 - Open Power BI",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-NoProfile","-Command",f'Start-Process "{pbip}"'],
+            "problemMatcher": []
+        }
+    ]
+}
+write_text(vscode / "tasks.json", json.dumps(tasks, indent=2) + "\n")
+write_text(vscode / "settings.json", json.dumps({
+    "files.encoding":"utf8",
+    "files.eol":"\n",
+    "python.terminal.activateEnvironment": True,
+    "terminal.integrated.cwd":"${workspaceFolder}"
+}, indent=2) + "\n")
+log("OK", ".vscode tasks/settings created")
+
+# 5. Gitignore
+gitignore = root / ".gitignore"
+existing = gitignore.read_text(encoding="utf-8-sig").splitlines() if gitignore.exists() else []
+needed = [".pbi/","**/.pbi/","*.abf","*.tmp","*.lock","backups/","__pycache__/","*.pyc",".venv/","venv/",".DS_Store","Thumbs.db"]
+for item in needed:
+    if item not in existing: existing.append(item)
+write_text(gitignore, "\n".join(existing).rstrip() + "\n")
+
+# 6. Power BI launch and screenshot attempt
+def install(pkg):
+    rc,_,_ = run([sys.executable,"-m","pip","install",pkg,"--quiet"], cwd=root, timeout=300)
+    return rc == 0
+
+def screenshot_attempt():
+    if os.name != "nt":
+        return 0
+    try:
+        import pyautogui
+    except Exception:
+        if not install("pyautogui"):
+            log("WARNING","Could not install pyautogui; screenshot automation skipped.")
+            return 0
+        import pyautogui
+    try:
+        os.startfile(str(pbip))
+    except Exception as e:
+        log("WARNING", f"Could not open Power BI automatically: {e}")
+        return 0
+
+    log("INFO","Waiting for Power BI to load before screenshot attempt...")
+    time.sleep(20)
+    # Move to first tab, then capture screen and advance pages.
+    try:
+        for _ in range(max(len(ordered_pages),1)+2):
+            pyautogui.hotkey("ctrl","pageup")
+            time.sleep(0.5)
+        count = 0
+        for idx, name in enumerate(ordered_pages,1):
+            time.sleep(2)
+            target = images / f"{idx:02d}_{slug(name)}.png"
+            pyautogui.screenshot(str(target))
+            if target.exists() and target.stat().st_size > 1000:
+                count += 1
+                log("OK", f"Screenshot captured: {target.name}")
+            if idx < len(ordered_pages):
+                pyautogui.hotkey("ctrl","pagedown")
+        pyautogui.hotkey("ctrl","s")
+        return count
+    except Exception as e:
+        log("WARNING", f"Screenshot automation could not finish: {e}")
+        return 0
+
+screenshots = screenshot_attempt()
+
+# 7. Rebuild gallery from screenshots present
+pngs = sorted(images.glob("*.png"))
+gallery = ["<!-- DASHBOARD_GALLERY_START -->","## Dashboard Gallery",""]
+if pngs:
+    for p in pngs:
+        title = p.stem.replace("_"," ").title()
+        gallery += [f"### {title}","",f"![{title}](images/powerbi/{p.name})",""]
+else:
+    gallery += ["Final screenshots will be added here.",""]
+gallery += ["<!-- DASHBOARD_GALLERY_END -->"]
+readme_path = root / "README.md"
+text = readme_path.read_text(encoding="utf-8-sig")
+start = text.find("<!-- DASHBOARD_GALLERY_START -->")
+end = text.find("<!-- DASHBOARD_GALLERY_END -->")
+if start >= 0 and end >= 0:
+    end += len("<!-- DASHBOARD_GALLERY_END -->")
+    text = text[:start] + "\n".join(gallery) + text[end:]
+write_text(readme_path, text)
+
+# 8. Git / GitHub
+git = shutil.which("git")
+if not git:
+    raise SystemExit("Git is not installed or not on PATH.")
+if not (root / ".git").exists():
+    rc,_,err = run([git,"init"], cwd=root)
+    if rc != 0: raise SystemExit(f"git init failed: {err}")
+run([git,"branch","-M","main"], cwd=root)
+
+# GitHub CLI
+gh = shutil.which("gh")
+if not gh and os.name == "nt":
+    winget = shutil.which("winget")
+    if winget:
+        log("INFO","Installing GitHub CLI with winget...")
+        run([winget,"install","--id","GitHub.cli","-e","--source","winget","--accept-source-agreements","--accept-package-agreements"], timeout=300)
+        candidates = [Path(r"C:\Program Files\GitHub CLI\gh.exe"), Path.home()/"AppData"/"Local"/"Programs"/"GitHub CLI"/"gh.exe"]
+        gh = next((str(p) for p in candidates if p.exists()), shutil.which("gh"))
+
+if gh:
+    rc,_,_ = run([gh,"auth","status","--hostname","github.com"], timeout=60)
+    if rc != 0:
+        log("INFO","GitHub login is required. Complete the browser login opened by GitHub CLI.")
+        rc,_,err = run([gh,"auth","login","--hostname","github.com","--git-protocol","https","--web"], timeout=900)
+        if rc != 0:
+            log("WARNING", f"GitHub login not completed: {err}")
+    rc, username, _ = run([gh,"api","user","--jq",".login"], timeout=60)
+    username = username.strip() if rc == 0 else ""
+    if username:
+        run([git,"config","user.name","Oluwatosin Oluwaseun Mulero"], cwd=root)
+        rc,email,_ = run([git,"config","--get","user.email"], cwd=root)
+        if not email.strip():
+            run([git,"config","user.email",f"{username}@users.noreply.github.com"], cwd=root)
+        run([gh,"auth","setup-git"], timeout=60)
+else:
+    username = ""
+    log("WARNING","GitHub CLI unavailable. Git will still be committed locally.")
+
+run([git,"add","-A"], cwd=root)
+rc, pending, _ = run([git,"status","--porcelain"], cwd=root)
+if pending.strip():
+    rc,_,err = run([git,"commit","-m","Finalize Customer 360 analytics portfolio"], cwd=root, timeout=120)
+    if rc != 0:
+        raise SystemExit(f"Git commit failed: {err}")
+    log("OK","Final Git commit created")
+else:
+    log("OK","No uncommitted changes remain")
+
+remote_url = ""
+if gh and username:
+    rc, origin, _ = run([git,"remote","get-url","origin"], cwd=root)
+    origin = origin.strip()
+    repo_full = f"{username}/{REPO_NAME}"
+    if not origin:
+        rc, url, _ = run([gh,"repo","view",repo_full,"--json","url","--jq",".url"], timeout=60)
+        if rc == 0 and url.strip():
+            remote_url = url.strip()
+            run([git,"remote","add","origin",f"https://github.com/{repo_full}.git"], cwd=root)
+        else:
+            vis = "--public" if REPO_VISIBILITY == "public" else "--private"
+            rc, out, err = run([gh,"repo","create",REPO_NAME,vis,"--source",str(root),"--remote","origin","--description",REPO_DESCRIPTION], cwd=root, timeout=180)
+            if rc != 0:
+                log("WARNING", f"GitHub repository creation failed: {err}")
+            else:
+                log("OK", f"GitHub repository created as {REPO_VISIBILITY}")
+    rc, origin, _ = run([git,"remote","get-url","origin"], cwd=root)
+    if rc == 0 and origin.strip():
+        remote_url = origin.strip()
+        rc,_,err = run([git,"push","-u","origin","main"], cwd=root, timeout=300)
+        if rc == 0:
+            log("OK","GitHub push completed")
+        else:
+            log("WARNING", f"GitHub push failed; local commit is safe: {err}")
+
+# 9. Final status
+rc, status_out, _ = run([git,"status","--short"], cwd=root)
+clean = not status_out.strip()
+status = "PASS" if not errors and len(bad) == 0 else "REVIEW REQUIRED"
+report = f"""============================================================
+CUSTOMER 360 - FINAL STAGE 6 STATUS
+============================================================
+
+STATUS: {status}
+
+PROJECT:
+{root}
+
+POWER BI PAGES:
+{len(ordered_pages)}
+
+POWER BI JSON ERRORS:
+{len(bad)}
+
+SCREENSHOTS PRESENT:
+{len(list(images.glob("*.png")))}
+
+SCREENSHOTS AUTO-CAPTURED THIS RUN:
+{screenshots}
+
+GIT WORKING TREE CLEAN:
+{clean}
+
+GITHUB REMOTE:
+{remote_url or "NOT CONFIGURED"}
+
+REPOSITORY VISIBILITY:
+{REPO_VISIBILITY if remote_url else "N/A"}
+
+WARNINGS:
+{len(warnings)}
+
+ERRORS:
+{len(errors)}
+
+README:
+{root / "README.md"}
+
+RECRUITER SUMMARY:
+{docs / "RECRUITER_PROJECT_SUMMARY.md"}
+
+SCREENSHOTS:
+{images}
+
+============================================================
+"""
+write_text(status_path, report)
+print("\n" + report)
+
+# Save a copy of this script under scripts for repeat runs.
+try:
+    src = Path(__file__).resolve()
+    dst = scripts / "stage6_publish.py"
+    if src != dst:
+        shutil.copy2(src, dst)
+except Exception:
+    pass
+
+if os.name == "nt":
+    try: os.startfile(str(qa))
+    except Exception: pass
+
+print("STAGE 6 COMPLETE")
+'''
+compile(code, "<stage6>", "exec")
+print("syntax ok", len(code.splitlines()))
+
+
+
+code2 = code.replace(
+'''    log("INFO","Waiting for Power BI to load before screenshot attempt...")
+    time.sleep(20)
+    # Move to first tab, then capture screen and advance pages.
+    try:
+        for _ in range(max(len(ordered_pages),1)+2):
+            pyautogui.hotkey("ctrl","pageup")
+            time.sleep(0.5)
+        count = 0
+        for idx, name in enumerate(ordered_pages,1):
+            time.sleep(2)
+            target = images / f"{idx:02d}_{slug(name)}.png"
+            pyautogui.screenshot(str(target))
+            if target.exists() and target.stat().st_size > 1000:
+                count += 1
+                log("OK", f"Screenshot captured: {target.name}")
+            if idx < len(ordered_pages):
+                pyautogui.hotkey("ctrl","pagedown")
+        pyautogui.hotkey("ctrl","s")
+        return count
+    except Exception as e:
+        log("WARNING", f"Screenshot automation could not finish: {e}")
+        return 0
+''',
+'''    log("INFO","Waiting for Power BI to load before screenshot attempt...")
+    time.sleep(12)
+    try:
+        try:
+            import pygetwindow as gw
+        except Exception:
+            install("pygetwindow")
+            import pygetwindow as gw
+
+        window = None
+        deadline = time.time() + 60
+        while time.time() < deadline and window is None:
+            candidates = []
+            for title in gw.getAllTitles():
+                if title and ("Power BI" in title or PROJECT_NAME.lower() in title.lower()):
+                    candidates.extend(gw.getWindowsWithTitle(title))
+            candidates = [w for w in candidates if getattr(w, "width", 0) > 500 and getattr(w, "height", 0) > 400]
+            if candidates:
+                window = candidates[0]
+                break
+            time.sleep(2)
+
+        if window is not None:
+            try:
+                window.restore()
+            except Exception:
+                pass
+            try:
+                window.maximize()
+            except Exception:
+                pass
+            try:
+                window.activate()
+            except Exception:
+                pass
+            time.sleep(2)
+
+        for _ in range(max(len(ordered_pages),1)+2):
+            pyautogui.hotkey("ctrl","pageup")
+            time.sleep(0.5)
+
+        count = 0
+        for idx, name in enumerate(ordered_pages,1):
+            time.sleep(2)
+            target = images / f"{idx:02d}_{slug(name)}.png"
+            if window is not None:
+                region = (max(window.left,0), max(window.top,0), window.width, window.height)
+                shot = pyautogui.screenshot(region=region)
+                shot.save(str(target))
+            else:
+                pyautogui.screenshot(str(target))
+
+            if target.exists() and target.stat().st_size > 1000:
+                count += 1
+                log("OK", f"Screenshot captured: {target.name}")
+
+            if idx < len(ordered_pages):
+                pyautogui.hotkey("ctrl","pagedown")
+
+        pyautogui.hotkey("ctrl","s")
+        time.sleep(3)
+        return count
+
+    except Exception as e:
+        log("WARNING", f"Screenshot automation could not finish: {e}")
+        return 0
+'''
+)
+compile(code2, "<stage6>", "exec")
+print("syntax ok", len(code2.splitlines()))
