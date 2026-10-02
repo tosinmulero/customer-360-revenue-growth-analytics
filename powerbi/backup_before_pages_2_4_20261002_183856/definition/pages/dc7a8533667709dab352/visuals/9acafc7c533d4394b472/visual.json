@@ -1,0 +1,139 @@
+{
+    "$schema":  "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+    "name":  "9acafc7c533d4394b472",
+    "position":  {
+                     "x":  20,
+                     "y":  170,
+                     "z":  10,
+                     "height":  880,
+                     "width":  616,
+                     "tabOrder":  7
+                 },
+    "visual":  {
+                   "visualType":  "lineChart",
+                   "query":  {
+                                 "queryState":  {
+                                                    "Category":  {
+                                                                     "projections":  [
+                                                                                         {
+                                                                                             "field":  {
+                                                                                                           "Column":  {
+                                                                                                                          "Expression":  {
+                                                                                                                                             "SourceRef":  {
+                                                                                                                                                               "Entity":  "monthly_kpis"
+                                                                                                                                                           }
+                                                                                                                                         },
+                                                                                                                          "Property":  "month"
+                                                                                                                      }
+                                                                                                       },
+                                                                                             "queryRef":  "monthly_kpis.month",
+                                                                                             "nativeQueryRef":  "month",
+                                                                                             "active":  true
+                                                                                         }
+                                                                                     ]
+                                                                 },
+                                                    "Y":  {
+                                                              "projections":  [
+                                                                                  {
+                                                                                      "field":  {
+                                                                                                    "Aggregation":  {
+                                                                                                                        "Expression":  {
+                                                                                                                                           "Column":  {
+                                                                                                                                                          "Expression":  {
+                                                                                                                                                                             "SourceRef":  {
+                                                                                                                                                                                               "Entity":  "monthly_kpis"
+                                                                                                                                                                                           }
+                                                                                                                                                                         },
+                                                                                                                                                          "Property":  "revenue"
+                                                                                                                                                      }
+                                                                                                                                       },
+                                                                                                                        "Function":  0
+                                                                                                                    }
+                                                                                                },
+                                                                                      "queryRef":  "Sum(monthly_kpis.revenue)",
+                                                                                      "nativeQueryRef":  "Sum of revenue"
+                                                                                  }
+                                                                              ]
+                                                          }
+                                                },
+                                 "sortDefinition":  {
+                                                        "sort":  [
+                                                                     {
+                                                                         "field":  {
+                                                                                       "Column":  {
+                                                                                                      "Expression":  {
+                                                                                                                         "SourceRef":  {
+                                                                                                                                           "Entity":  "monthly_kpis"
+                                                                                                                                       }
+                                                                                                                     },
+                                                                                                      "Property":  "month"
+                                                                                                  }
+                                                                                   },
+                                                                         "direction":  "Ascending"
+                                                                     }
+                                                                 ],
+                                                        "isDefaultSort":  true
+                                                    }
+                             },
+                   "drillFilterOtherVisuals":  true,
+                   "visualContainerObjects":  {
+                                                  "title":  [
+                                                                {
+                                                                    "properties":  {
+                                                                                       "show":  {
+                                                                                                    "expr":  {
+                                                                                                                 "Literal":  {
+                                                                                                                                 "Value":  "true"
+                                                                                                                             }
+                                                                                                             }
+                                                                                                },
+                                                                                       "text":  {
+                                                                                                    "expr":  {
+                                                                                                                 "Literal":  {
+                                                                                                                                 "Value":  "\u0027Monthly Revenue Trend\u0027"
+                                                                                                                             }
+                                                                                                             }
+                                                                                                }
+                                                                                   }
+                                                                }
+                                                            ]
+                                              }
+               },
+    "filterConfig":  {
+                         "filters":  [
+                                         {
+                                             "name":  "b52fcbadbe77a5063748",
+                                             "field":  {
+                                                           "Column":  {
+                                                                          "Expression":  {
+                                                                                             "SourceRef":  {
+                                                                                                               "Entity":  "monthly_kpis"
+                                                                                                           }
+                                                                                         },
+                                                                          "Property":  "month"
+                                                                      }
+                                                       },
+                                             "type":  "Categorical"
+                                         },
+                                         {
+                                             "name":  "ce11c7920d6e3264218d",
+                                             "field":  {
+                                                           "Aggregation":  {
+                                                                               "Expression":  {
+                                                                                                  "Column":  {
+                                                                                                                 "Expression":  {
+                                                                                                                                    "SourceRef":  {
+                                                                                                                                                      "Entity":  "monthly_kpis"
+                                                                                                                                                  }
+                                                                                                                                },
+                                                                                                                 "Property":  "revenue"
+                                                                                                             }
+                                                                                              },
+                                                                               "Function":  0
+                                                                           }
+                                                       },
+                                             "type":  "Advanced"
+                                         }
+                                     ]
+                     }
+}

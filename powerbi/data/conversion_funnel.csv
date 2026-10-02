@@ -1,0 +1,2 @@
+session_users,product_view_users,cart_users,checkout_users,purchasing_users,session_to_product_view_pct,view_to_cart_pct,cart_to_checkout_pct,checkout_to_purchase_pct,overall_conversion_pct
+267116,61252,12545,9715,4419,22.93,20.48,77.44,45.49,1.65

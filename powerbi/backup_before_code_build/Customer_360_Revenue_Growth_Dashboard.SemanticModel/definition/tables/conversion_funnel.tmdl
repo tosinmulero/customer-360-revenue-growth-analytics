@@ -1,0 +1,110 @@
+table conversion_funnel
+	lineageTag: 85261614-ce9f-4b68-a331-f87f5fd2a1af
+
+	column session_users
+		dataType: int64
+		formatString: 0
+		lineageTag: d85b2a5b-f624-4d8e-a4b9-11100160ee6e
+		summarizeBy: sum
+		sourceColumn: session_users
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_view_users
+		dataType: int64
+		formatString: 0
+		lineageTag: 0776a08a-f07a-4ef1-99e6-1d48dd11ddbc
+		summarizeBy: sum
+		sourceColumn: product_view_users
+
+		annotation SummarizationSetBy = Automatic
+
+	column cart_users
+		dataType: int64
+		formatString: 0
+		lineageTag: 4892fc12-a9c5-402d-b81f-e383f1e72a5d
+		summarizeBy: sum
+		sourceColumn: cart_users
+
+		annotation SummarizationSetBy = Automatic
+
+	column checkout_users
+		dataType: int64
+		formatString: 0
+		lineageTag: cce47afe-1091-46aa-83d3-57f418eb81ec
+		summarizeBy: sum
+		sourceColumn: checkout_users
+
+		annotation SummarizationSetBy = Automatic
+
+	column purchasing_users
+		dataType: int64
+		formatString: 0
+		lineageTag: 0ee7a18a-22d2-4ac4-9229-3e7ba3a2586c
+		summarizeBy: sum
+		sourceColumn: purchasing_users
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_to_product_view_pct
+		dataType: double
+		lineageTag: 1010e9f5-4197-40d0-92a7-099548003b1c
+		summarizeBy: sum
+		sourceColumn: session_to_product_view_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column view_to_cart_pct
+		dataType: double
+		lineageTag: 29002153-e299-493b-8bec-a4825cee2e0e
+		summarizeBy: sum
+		sourceColumn: view_to_cart_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cart_to_checkout_pct
+		dataType: double
+		lineageTag: 926bba53-eff2-44b8-91f5-21c3ef3344c1
+		summarizeBy: sum
+		sourceColumn: cart_to_checkout_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column checkout_to_purchase_pct
+		dataType: double
+		lineageTag: 441f131d-46fa-49ab-bd31-d0d1b315d928
+		summarizeBy: sum
+		sourceColumn: checkout_to_purchase_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column overall_conversion_pct
+		dataType: double
+		lineageTag: dc3b7389-0a89-40a1-be9b-ff4da8894c65
+		summarizeBy: sum
+		sourceColumn: overall_conversion_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition conversion_funnel = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\OLUWATOSIN OLUWASEUN\Downloads\customer-360-revenue-growth-analytics\powerbi\data\conversion_funnel.csv"),[Delimiter=",", Columns=10, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"session_users", Int64.Type}, {"product_view_users", Int64.Type}, {"cart_users", Int64.Type}, {"checkout_users", Int64.Type}, {"purchasing_users", Int64.Type}, {"session_to_product_view_pct", type number}, {"view_to_cart_pct", type number}, {"cart_to_checkout_pct", type number}, {"checkout_to_purchase_pct", type number}, {"overall_conversion_pct", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

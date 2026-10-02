@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Customer_360_Revenue_Growth_Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "2fe1bb3c-7440-4268-b150-308b09c9b6e1"
+  }
+}

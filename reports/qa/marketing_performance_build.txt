@@ -1,0 +1,59 @@
+============================================================
+CUSTOMER 360 - MARKETING PERFORMANCE BUILD
+============================================================
+
+STATUS:
+PASS
+
+PROJECT:
+C:\Users\OLUWATOSIN OLUWASEUN\Downloads\customer-360-revenue-growth-analytics
+
+BACKUP:
+C:\Users\OLUWATOSIN OLUWASEUN\Downloads\customer-360-revenue-growth-analytics\backups\marketing_stage_20261002_203018
+
+DATA FILE:
+C:\Users\OLUWATOSIN OLUWASEUN\Downloads\customer-360-revenue-growth-analytics\data\processed\synthetic_marketing_performance.csv
+
+TMDL FILE:
+C:\Users\OLUWATOSIN OLUWASEUN\Downloads\customer-360-revenue-growth-analytics\powerbi\Customer_360_Revenue_Growth_Dashboard.SemanticModel\definition\tables\Marketing Performance.tmdl
+
+REPORT PAGE:
+Marketing Performance
+
+PAGE ID:
+7f4b1a9c2d6e8f305abc
+
+VISUALS:
+12
+
+MARKETING MEASURES:
+17
+
+TOTAL SPEND:
+40000
+
+TOTAL REVENUE:
+166000
+
+TOTAL PROFIT:
+126000
+
+TOTAL ACQUISITIONS:
+2430
+
+OVERALL ROAS:
+4.15
+
+BLENDED CPA:
+16.46
+
+MARKETING ROI:
+315%
+
+JSON ERRORS:
+0
+
+SYNTHETIC DATA LABEL:
+YES
+
+============================================================

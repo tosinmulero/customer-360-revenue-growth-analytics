@@ -1,0 +1,83 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "f82cd5cf050343b29eaa",
+  "position": {
+    "x": 650,
+    "y": 20,
+    "z": 3,
+    "height": 115,
+    "width": 300,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "synthetic_marketing_campaign_performance"
+                        }
+                      },
+                      "Property": "roas"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Avg(synthetic_marketing_campaign_performance.roas)",
+              "nativeQueryRef": "Avg of roas"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Synthetic Average Campaign ROAS'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "24064101407ee0e162c3",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "customer_360"
+              }
+            },
+            "Property": "Purchasing Customers"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

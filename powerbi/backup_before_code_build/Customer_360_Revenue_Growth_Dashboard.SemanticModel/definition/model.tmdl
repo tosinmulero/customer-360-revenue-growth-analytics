@@ -1,0 +1,36 @@
+model Model
+	culture: en-GB
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["customer_360","synthetic_ab_test","synthetic_marketing_campaign_performance","revenue_forecast","device_conversion","monthly_kpis","product_performance","rfm_segment_summary","cohort_retention","acquisition_performance","conversion_funnel"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table customer_360
+ref table DateTableTemplate_d75a1c5f-b6fa-48fb-b240-7f468112a53a
+ref table LocalDateTable_6719a9d6-8759-4318-b2bc-b17274a16fdc
+ref table LocalDateTable_db393816-a408-481c-b52a-21299c689a53
+ref table synthetic_ab_test
+ref table synthetic_marketing_campaign_performance
+ref table revenue_forecast
+ref table LocalDateTable_0697b8a9-1c3f-4f9e-97b4-a7fc8740bab7
+ref table device_conversion
+ref table monthly_kpis
+ref table LocalDateTable_599865bc-3d1f-4ce6-8218-59c5ad21bda8
+ref table product_performance
+ref table rfm_segment_summary
+ref table cohort_retention
+ref table LocalDateTable_a5894d14-6953-4cce-8f69-58d6ba2a9034
+ref table LocalDateTable_bb20f19e-f18b-4466-a0b9-153eb528b20d
+ref table acquisition_performance
+ref table conversion_funnel
+
+ref cultureInfo en-GB
+

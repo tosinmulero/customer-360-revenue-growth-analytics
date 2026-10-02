@@ -1,0 +1,65 @@
+CUSTOMER 360 POWER BI RECOVERY REPORT
+============================================================
+
+Recovery completed:
+10/02/2026 19:48:06
+
+PBIP:
+.\powerbi\Customer_360_Revenue_Growth_Dashboard.pbip
+
+Emergency backup:
+.\powerbi\recovery_backup_20261002_194803
+
+Report pages detected:
+4
+
+Semantic model:
+Restored from known-good backup where available.
+
+Core measures:
+PASS
+
+Synthetic marketing measures:
+PASS
+
+Synthetic A/B measures:
+PASS
+
+Forecast measure:
+PASS
+
+JSON validation:
+PASS
+
+UTF-8 BOM validation:
+PASS
+
+Critical corrected measure:
+Overall Synthetic ROAS =
+SUM(revenue) / SUM(spend)
+
+Expected validated result:
+166000 / 40000 = 4.15
+
+FIELD TYPE RULES
+------------------------------------------------------------
+Executive KPI cards:
+MEASURES
+
+Executive trend charts:
+COLUMNS
+
+Customer and retention charts:
+COLUMNS / aggregations
+
+Acquisition and product charts:
+COLUMNS / aggregations
+
+Forecast chart:
+COLUMN or Forecast Revenue MEASURE
+
+Synthetic experiment charts:
+COLUMNS and SYNTHETIC MEASURES
+
+Synthetic marketing KPI:
+Overall Synthetic ROAS MEASURE

@@ -1,0 +1,37 @@
+CUSTOMER 360 & REVENUE GROWTH ANALYTICS - VALIDATION REPORT
+=================================================================
+
+CUSTOMER 360 DATA
+----------------------------------------
+Rows: 270,154
+Columns: 15
+Duplicate user IDs: 0
+Missing user IDs: 0
+
+MISSING VALUES
+----------------------------------------
+avg_order_value: 265,735
+
+CUSTOMER SUMMARY
+----------------------------------------
+Total customers: 270,154
+Purchasing customers: 4,419
+Repeat purchasing customers: 775
+Total revenue: 362,165.00
+Average revenue per customer: 1.34
+
+TOP MONTH
+----------------------------------------
+Highest revenue month: 2020-12
+Revenue: 160,555.00
+
+TOP ACQUISITION CHANNEL
+----------------------------------------
+Channel: google / organic
+Revenue: 95,775.00
+Conversion rate: 1.19%
+
+TOP PRODUCT
+----------------------------------------
+Product: Google Zip Hoodie F/C
+Revenue: 13,692.00

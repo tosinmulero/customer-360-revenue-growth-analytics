@@ -1,0 +1,107 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "3f46378ac5a5403eaf7c",
+  "position": {
+    "x": 20,
+    "y": 435,
+    "z": 6,
+    "height": 250,
+    "width": 600,
+    "tabOrder": 6
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "synthetic_marketing_campaign_performance"
+                    }
+                  },
+                  "Property": "campaign"
+                }
+              },
+              "queryRef": "synthetic_marketing_campaign_performance.campaign",
+              "nativeQueryRef": "campaign",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "synthetic_marketing_campaign_performance"
+                        }
+                      },
+                      "Property": "roas"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Avg(synthetic_marketing_campaign_performance.roas)",
+              "nativeQueryRef": "Avg of roas"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "synthetic_marketing_campaign_performance"
+                      }
+                    },
+                    "Property": "roas"
+                  }
+                },
+                "Function": 1
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'SYNTHETIC — ROAS by Campaign'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,69 @@
+table device_conversion
+	lineageTag: e84d60e8-336c-465a-8163-993d6454e919
+
+	column device_category
+		dataType: string
+		lineageTag: 1e682c71-40cf-4992-88dd-d00c9e8e094c
+		summarizeBy: none
+		sourceColumn: device_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column users
+		dataType: int64
+		formatString: 0
+		lineageTag: 403b4c8f-78f6-4d4a-845e-bc747239b1ea
+		summarizeBy: sum
+		sourceColumn: users
+
+		annotation SummarizationSetBy = Automatic
+
+	column purchasing_users
+		dataType: int64
+		formatString: 0
+		lineageTag: 15cb5f23-09ef-41f8-83c2-fe32610721d9
+		summarizeBy: sum
+		sourceColumn: purchasing_users
+
+		annotation SummarizationSetBy = Automatic
+
+	column purchases
+		dataType: int64
+		formatString: 0
+		lineageTag: 6092e878-7b6c-47e6-8302-c0b1ef1b9943
+		summarizeBy: sum
+		sourceColumn: purchases
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a29dc4b-a0c6-4778-9531-ee1dc8f72aaa
+		summarizeBy: sum
+		sourceColumn: revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversion_rate_pct
+		dataType: double
+		lineageTag: a0a20172-f0f9-4212-a171-5e6354761291
+		summarizeBy: sum
+		sourceColumn: conversion_rate_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition device_conversion = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\OLUWATOSIN OLUWASEUN\Downloads\customer-360-revenue-growth-analytics\powerbi\data\device_conversion.csv"),[Delimiter=",", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"device_category", type text}, {"users", Int64.Type}, {"purchasing_users", Int64.Type}, {"purchases", Int64.Type}, {"revenue", Int64.Type}, {"conversion_rate_pct", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

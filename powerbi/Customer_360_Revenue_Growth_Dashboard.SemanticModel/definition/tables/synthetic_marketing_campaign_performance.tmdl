@@ -1,0 +1,186 @@
+table synthetic_marketing_campaign_performance
+	lineageTag: d57d3cdc-5353-4723-a912-fcd1bddcd99e
+
+	measure 'Synthetic Total Spend' = SUM(synthetic_marketing_campaign_performance[spend])
+		formatString: 0
+		lineageTag: 60f38213-014c-4464-8f17-2a4e4e633d2f
+
+	measure 'Synthetic Total Campaign Spend' = SUM(synthetic_marketing_campaign_performance[spend])
+		formatString: 0
+		lineageTag: b9d476fe-1346-4c58-81a6-23a4783a532c
+
+	measure 'Synthetic Total Revenue' = SUM(synthetic_marketing_campaign_performance[revenue])
+		formatString: 0
+		lineageTag: 93d809e9-c2c6-4d75-8bfb-9520698aa3fb
+
+	measure 'Synthetic Total Campaign Revenue' = SUM(synthetic_marketing_campaign_performance[revenue])
+		formatString: 0
+		lineageTag: 18e7f56c-5ea3-477d-9072-0640dc2c9502
+
+	measure 'Overall Synthetic ROAS' = DIVIDE(SUM(synthetic_marketing_campaign_performance[revenue]), SUM(synthetic_marketing_campaign_performance[spend]))
+		formatString: 0.00
+		lineageTag: 978e8bb7-ef8f-4137-815d-51b8589660fd
+
+	measure 'Synthetic Overall ROAS' = DIVIDE(SUM(synthetic_marketing_campaign_performance[revenue]), SUM(synthetic_marketing_campaign_performance[spend]))
+		formatString: 0.00
+		lineageTag: 46ad3981-d3e8-40f1-b112-377be81b1a2f
+
+	measure 'Synthetic Average Campaign ROAS' = AVERAGE(synthetic_marketing_campaign_performance[roas])
+		formatString: 0.00
+		lineageTag: f8920327-c0aa-4730-8626-4c3aaf88262d
+
+	measure 'Synthetic Highest ROAS' = MAX(synthetic_marketing_campaign_performance[roas])
+		formatString: 0.00
+		lineageTag: 59e3a5c9-b8b5-4a24-8daf-e6d023e9f83b
+
+	measure 'Synthetic Lowest CPA' = MIN(synthetic_marketing_campaign_performance[cpa])
+		formatString: 0.00
+		lineageTag: 4c7ab09e-a84e-4d57-b953-551709217063
+
+	measure 'Synthetic Total Conversions' = SUM(synthetic_marketing_campaign_performance[conversions])
+		formatString: 0
+		lineageTag: fed12ca4-6826-41fc-bc46-db3a35f310d1
+
+	measure 'Synthetic Total Clicks' = SUM(synthetic_marketing_campaign_performance[clicks])
+		formatString: 0
+		lineageTag: 8d804e61-d39a-414c-beb7-bc7409eb0038
+
+	measure 'Synthetic Total Impressions' = SUM(synthetic_marketing_campaign_performance[impressions])
+		formatString: 0
+		lineageTag: 5b9fbc41-2321-4a24-9b53-9a62a3e29bed
+
+	measure 'Synthetic CTR %' = DIVIDE(SUM(synthetic_marketing_campaign_performance[clicks]), SUM(synthetic_marketing_campaign_performance[impressions]))
+		formatString: 0.00%
+		lineageTag: 568d6342-89d2-401d-8b8e-7768394972f9
+
+	measure 'Synthetic Conversion Rate %' = DIVIDE(SUM(synthetic_marketing_campaign_performance[conversions]), SUM(synthetic_marketing_campaign_performance[clicks]))
+		formatString: 0.00%
+		lineageTag: 75bde6ae-86c2-4385-afc2-fa1b619f9985
+
+	measure 'Synthetic CPA' = DIVIDE(SUM(synthetic_marketing_campaign_performance[spend]), SUM(synthetic_marketing_campaign_performance[conversions]))
+		formatString: 0.00
+		lineageTag: 99b28aa1-0711-472f-acfa-b7a10693365c
+
+	column campaign
+		dataType: string
+		lineageTag: 105d9978-3395-4811-9b1e-802cb4c3a85a
+		summarizeBy: none
+		sourceColumn: campaign
+
+		annotation SummarizationSetBy = Automatic
+
+	column spend
+		dataType: int64
+		formatString: 0
+		lineageTag: 793bf632-e034-4298-802a-be5af6459953
+		summarizeBy: sum
+		sourceColumn: spend
+
+		annotation SummarizationSetBy = Automatic
+
+	column impressions
+		dataType: int64
+		formatString: 0
+		lineageTag: 6da12dcd-d9d7-4bd7-ab55-8f6fc2e2594d
+		summarizeBy: sum
+		sourceColumn: impressions
+
+		annotation SummarizationSetBy = Automatic
+
+	column clicks
+		dataType: int64
+		formatString: 0
+		lineageTag: ba8f8bf9-2a5b-4128-85c3-1e68b3b04e3c
+		summarizeBy: sum
+		sourceColumn: clicks
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversions
+		dataType: int64
+		formatString: 0
+		lineageTag: cd28855b-bccf-4cb7-afc1-4c11fc7f2acb
+		summarizeBy: sum
+		sourceColumn: conversions
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue
+		dataType: int64
+		formatString: 0
+		lineageTag: b554e6c6-8e3a-4be4-99a4-85caef92f5e5
+		summarizeBy: sum
+		sourceColumn: revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column ctr_pct
+		dataType: double
+		lineageTag: 4d37afc0-95ca-48e7-887c-360416c51f29
+		summarizeBy: sum
+		sourceColumn: ctr_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cpc
+		dataType: double
+		lineageTag: 89b97e3d-1190-48d0-8434-04176e334b41
+		summarizeBy: sum
+		sourceColumn: cpc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column conversion_rate_pct
+		dataType: double
+		lineageTag: 71bd22d8-1a11-4ac0-a6b5-fbe05ad21bf3
+		summarizeBy: sum
+		sourceColumn: conversion_rate_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cpa
+		dataType: double
+		lineageTag: 8ec83c36-8ea7-4ee0-8c54-2f14653605d4
+		summarizeBy: sum
+		sourceColumn: cpa
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column roas
+		dataType: double
+		lineageTag: 7c485888-ac54-4b99-aa17-837038b3bc1a
+		summarizeBy: sum
+		sourceColumn: roas
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column data_type
+		dataType: string
+		lineageTag: 97c94aea-d5b8-4037-b2d1-2d9b57e07cdb
+		summarizeBy: none
+		sourceColumn: data_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition synthetic_marketing_campaign_performance = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\OLUWATOSIN OLUWASEUN\Downloads\customer-360-revenue-growth-analytics\powerbi\data\synthetic_marketing_campaign_performance.csv"),[Delimiter=",", Columns=12, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"campaign", type text}, {"spend", Int64.Type}, {"impressions", Int64.Type}, {"clicks", Int64.Type}, {"conversions", Int64.Type}, {"revenue", Int64.Type}, {"ctr_pct", type number}, {"cpc", type number}, {"conversion_rate_pct", type number}, {"cpa", type number}, {"roas", type number}, {"data_type", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

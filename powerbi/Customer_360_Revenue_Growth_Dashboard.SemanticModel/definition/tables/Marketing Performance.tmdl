@@ -1,0 +1,126 @@
+table 'Marketing Performance'
+	lineageTag: e2e10834-d95b-4d80-abc0-46e666d4e348
+
+	measure 'Total Marketing Spend' = SUM('Marketing Performance'[Spend])
+		formatString: £#,0
+		lineageTag: 9165b12a-ba97-4e89-a459-a14a5f6684ef
+
+	measure 'Total Marketing Revenue' = SUM('Marketing Performance'[Revenue])
+		formatString: £#,0
+		lineageTag: addcb36b-1d28-4938-a4e2-a39bc5efa5f2
+
+	measure 'Total Acquisitions' = SUM('Marketing Performance'[Acquisitions])
+		formatString: #,0
+		lineageTag: 3070453a-775f-4568-b8bc-8fee8e8d16e7
+
+	measure 'Marketing Profit' = [Total Marketing Revenue] - [Total Marketing Spend]
+		formatString: £#,0
+		lineageTag: 031e3835-0c42-49aa-89a1-a243fd07d900
+
+	measure 'Marketing ROAS' = DIVIDE([Total Marketing Revenue], [Total Marketing Spend])
+		formatString: 0.00
+		lineageTag: 25473d62-2b7a-43e1-8ee0-0c92ee554305
+
+	measure 'Marketing CPA' = DIVIDE([Total Marketing Spend], [Total Acquisitions])
+		formatString: £0.00
+		lineageTag: e097a345-6900-438b-b887-bd1eae5647a2
+
+	measure 'Marketing ROI %' = DIVIDE([Total Marketing Revenue] - [Total Marketing Spend], [Total Marketing Spend])
+		formatString: 0.0%
+		lineageTag: 83f362e9-15e5-4150-ba3f-18988a68513e
+
+	measure 'Revenue Share %' = DIVIDE([Total Marketing Revenue], CALCULATE([Total Marketing Revenue], REMOVEFILTERS('Marketing Performance'[Campaign])))
+		formatString: 0.0%
+		lineageTag: bca5cb92-dcdc-4d72-a996-1db561ef6f23
+
+	measure 'Spend Share %' = DIVIDE([Total Marketing Spend], CALCULATE([Total Marketing Spend], REMOVEFILTERS('Marketing Performance'[Campaign])))
+		formatString: 0.0%
+		lineageTag: dfd42bc2-3682-4683-9d54-c62bfb5e24a6
+
+	measure 'Revenue Rank' = RANKX(ALL('Marketing Performance'[Campaign]), [Total Marketing Revenue], , DESC, DENSE)
+		formatString: 0
+		lineageTag: 0a7a1881-7b3b-4f75-a388-89c06d7fbde7
+
+	measure 'ROAS Rank' = RANKX(ALL('Marketing Performance'[Campaign]), [Marketing ROAS], , DESC, DENSE)
+		formatString: 0
+		lineageTag: fa1e1966-dc0f-4d00-90c0-a3a4fa04f3f6
+
+	measure 'CPA Rank' = RANKX(ALL('Marketing Performance'[Campaign]), [Marketing CPA], , ASC, DENSE)
+		formatString: 0
+		lineageTag: adb0bda5-94a7-4647-885b-cdea245300f8
+
+	measure 'Highest Revenue Campaign' = CONCATENATEX(TOPN(1, ALL('Marketing Performance'[Campaign]), [Total Marketing Revenue], DESC, 'Marketing Performance'[Campaign], ASC), 'Marketing Performance'[Campaign], ", ")
+		lineageTag: cfd803d1-59f8-4b11-ba6e-48cb037fda1d
+
+	measure 'Best ROAS Campaign' = CONCATENATEX(TOPN(1, ADDCOLUMNS(ALL('Marketing Performance'[Campaign]), "__ROAS", CALCULATE([Marketing ROAS])), [__ROAS], DESC, 'Marketing Performance'[Campaign], ASC), 'Marketing Performance'[Campaign], ", ")
+		lineageTag: 0a452276-309a-4010-bcdd-eb354621814e
+
+	measure 'Lowest ROAS Campaign' = CONCATENATEX(TOPN(1, ADDCOLUMNS(ALL('Marketing Performance'[Campaign]), "__ROAS", CALCULATE([Marketing ROAS])), [__ROAS], ASC, 'Marketing Performance'[Campaign], ASC), 'Marketing Performance'[Campaign], ", ")
+		lineageTag: 6c0cca05-777b-47a6-8b36-3b67040b739b
+
+	measure 'Lowest CPA Campaign' = CONCATENATEX(TOPN(1, ADDCOLUMNS(ALL('Marketing Performance'[Campaign]), "__CPA", CALCULATE([Marketing CPA])), [__CPA], ASC, 'Marketing Performance'[Campaign], ASC), 'Marketing Performance'[Campaign], ", ")
+		lineageTag: 816909b0-4e6f-4358-b415-26a9d493b7de
+
+	measure 'Campaign Count' = DISTINCTCOUNT('Marketing Performance'[Campaign])
+		formatString: 0
+		lineageTag: 1432aa39-9394-4044-93b4-ef998192228c
+
+	column Campaign
+		dataType: string
+		lineageTag: 965c93e5-153a-4799-8639-5946a7272d0f
+		summarizeBy: none
+		sourceColumn: Campaign
+
+	column Spend
+		dataType: int64
+		formatString: £#,0
+		lineageTag: a4d13c06-2e3c-4d16-80f9-611da1191248
+		summarizeBy: sum
+		sourceColumn: Spend
+
+	column Revenue
+		dataType: int64
+		formatString: £#,0
+		lineageTag: e01d61bd-5598-4d64-bc08-e3ab2ed8fd38
+		summarizeBy: sum
+		sourceColumn: Revenue
+
+	column Acquisitions
+		dataType: int64
+		formatString: #,0
+		lineageTag: 8cd09b98-f8d4-4e81-bc03-ab0e7d2e304e
+		summarizeBy: sum
+		sourceColumn: Acquisitions
+
+	column CampaignOrder
+		dataType: int64
+		isHidden
+		lineageTag: 75955294-764b-4376-a331-f76efe0cd278
+		summarizeBy: none
+		sourceColumn: CampaignOrder
+
+	partition 'Marketing Performance' = m
+		mode: import
+		source =
+				let
+				    Source =
+				        #table(
+				            type table [
+				                Campaign = text,
+				                Spend = Int64.Type,
+				                Revenue = Int64.Type,
+				                Acquisitions = Int64.Type,
+				                CampaignOrder = Int64.Type
+				            ],
+				            {
+				                {"Google Search", 12000, 52000, 650, 1},
+				                {"Meta Paid Social", 9000, 29000, 430, 2},
+				                {"YouTube Video", 7000, 16000, 220, 3},
+				                {"Display Prospecting", 5500, 8000, 120, 4},
+				                {"Email Retargeting", 2500, 40000, 700, 5},
+				                {"Affiliate", 4000, 21000, 310, 6}
+				            }
+				        )
+				in
+				    Source
+

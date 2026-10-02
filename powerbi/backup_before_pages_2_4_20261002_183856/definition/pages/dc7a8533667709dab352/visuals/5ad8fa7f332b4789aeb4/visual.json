@@ -1,0 +1,74 @@
+{
+    "$schema":  "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+    "name":  "5ad8fa7f332b4789aeb4",
+    "position":  {
+                     "x":  1281.3333333333333,
+                     "y":  20,
+                     "z":  5,
+                     "height":  125,
+                     "width":  303.33333333333331,
+                     "tabOrder":  5
+                 },
+    "visual":  {
+                   "visualType":  "cardVisual",
+                   "query":  {
+                                 "queryState":  {
+                                                    "Data":  {
+                                                                 "projections":  [
+                                                                                     {
+                                                                                         "field":  {
+                                                                                                       "Measure":  {
+                                                                                                                       "Expression":  {
+                                                                                                                                          "SourceRef":  {
+                                                                                                                                                            "Entity":  "customer_360"
+                                                                                                                                                        }
+                                                                                                                                      },
+                                                                                                                       "Property":  "Repeat Purchaser Rate %"
+                                                                                                                   }
+                                                                                                   },
+                                                                                         "queryRef":  "customer_360.Repeat Purchaser Rate %",
+                                                                                         "nativeQueryRef":  "Repeat Purchaser Rate %"
+                                                                                     }
+                                                                                 ]
+                                                             }
+                                                },
+                                 "sortDefinition":  {
+                                                        "sort":  [
+                                                                     {
+                                                                         "field":  {
+                                                                                       "Measure":  {
+                                                                                                       "Expression":  {
+                                                                                                                          "SourceRef":  {
+                                                                                                                                            "Entity":  "customer_360"
+                                                                                                                                        }
+                                                                                                                      },
+                                                                                                       "Property":  "Repeat Purchaser Rate %"
+                                                                                                   }
+                                                                                   },
+                                                                         "direction":  "Descending"
+                                                                     }
+                                                                 ],
+                                                        "isDefaultSort":  true
+                                                    }
+                             },
+                   "drillFilterOtherVisuals":  true
+               },
+    "filterConfig":  {
+                         "filters":  [
+                                         {
+                                             "name":  "24064101407ee0e162c3",
+                                             "field":  {
+                                                           "Measure":  {
+                                                                           "Expression":  {
+                                                                                              "SourceRef":  {
+                                                                                                                "Entity":  "customer_360"
+                                                                                                            }
+                                                                                          },
+                                                                           "Property":  "Purchasing Customers"
+                                                                       }
+                                                       },
+                                             "type":  "Advanced"
+                                         }
+                                     ]
+                     }
+}

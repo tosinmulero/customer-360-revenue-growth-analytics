@@ -1,0 +1,228 @@
+table customer_360
+	lineageTag: 6d710ab9-ed50-440b-a432-f40b40786730
+
+	measure 'Total Customers' =
+			
+			DISTINCTCOUNT(customer_360[user_pseudo_id])
+		formatString: 0
+		lineageTag: dd7ccdc4-84cd-40a0-ae46-004f50f9e590
+
+	measure 'Purchasing Customers' =
+			
+			CALCULATE(
+			    COUNTROWS(customer_360),
+			    customer_360[purchases] > 0
+			)
+		formatString: 0
+		lineageTag: acf030c6-8784-41d3-955c-8f3c5a971511
+
+	measure 'Repeat Purchasing Customers' =
+			
+			CALCULATE(
+			    COUNTROWS(customer_360),
+			    customer_360[purchases] > 1
+			)
+		formatString: 0
+		lineageTag: ed38b325-8e61-4d10-9096-31cdf341a443
+
+	measure 'Total Revenue' =
+			
+			SUM(customer_360[total_revenue])
+		formatString: 0
+		lineageTag: bc341c5c-038c-4c3f-b6f7-e1360a4cc6fd
+
+	measure 'Purchase Rate %' =
+			
+			DIVIDE(
+			    [Purchasing Customers],
+			    [Total Customers]
+			)
+		formatString: 0.00%
+		lineageTag: a79e6e6f-1336-4a12-a25c-d3a1af821a77
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Repeat Purchaser Rate %' =
+			
+			DIVIDE(
+			    [Repeat Purchasing Customers],
+			    [Purchasing Customers]
+			)
+		formatString: 0.00%
+		lineageTag: 2c3f6cf5-6c2b-4f77-80b6-5c929aa4c8dd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue per Customer' =
+			
+			DIVIDE(
+			    [Total Revenue],
+			    [Total Customers]
+			)
+		formatString: 0.00
+		lineageTag: 16c771f9-6ffb-4cb5-a84d-219d770626b4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column user_pseudo_id
+		dataType: double
+		lineageTag: 493088a8-e5c6-417e-846a-2dedf728559a
+		summarizeBy: sum
+		sourceColumn: user_pseudo_id
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column first_seen_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8a4c95b6-8bda-4f16-b2f5-dc617fe661b2
+		summarizeBy: none
+		sourceColumn: first_seen_date
+
+		variation Variation
+			isDefault
+			relationship: 193a3a52-927f-4dcb-8196-d30657816750
+			defaultHierarchy: LocalDateTable_6719a9d6-8759-4318-b2bc-b17274a16fdc.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column last_seen_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6c3e0f5b-2864-462f-b816-f78a7f44d727
+		summarizeBy: none
+		sourceColumn: last_seen_date
+
+		variation Variation
+			isDefault
+			relationship: 6904ee66-efaa-4396-90ea-dce0213109f6
+			defaultHierarchy: LocalDateTable_db393816-a408-481c-b52a-21299c689a53.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column total_events
+		dataType: int64
+		formatString: 0
+		lineageTag: 0f236fd0-d843-468f-9c96-aaabc57eb9bf
+		summarizeBy: sum
+		sourceColumn: total_events
+
+		annotation SummarizationSetBy = Automatic
+
+	column sessions
+		dataType: int64
+		formatString: 0
+		lineageTag: 0486ebe5-656e-48d1-86af-e9d8ddd0d04e
+		summarizeBy: sum
+		sourceColumn: sessions
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_views
+		dataType: int64
+		formatString: 0
+		lineageTag: e7394996-9507-45dc-a0c7-5c6e017ceb46
+		summarizeBy: sum
+		sourceColumn: product_views
+
+		annotation SummarizationSetBy = Automatic
+
+	column add_to_carts
+		dataType: int64
+		formatString: 0
+		lineageTag: b82b012f-1190-4e0b-8d81-b8469ede2e62
+		summarizeBy: sum
+		sourceColumn: add_to_carts
+
+		annotation SummarizationSetBy = Automatic
+
+	column checkouts
+		dataType: int64
+		formatString: 0
+		lineageTag: f8d8a7d6-aa55-440e-b405-0dd1e68c2ce4
+		summarizeBy: sum
+		sourceColumn: checkouts
+
+		annotation SummarizationSetBy = Automatic
+
+	column purchases
+		dataType: int64
+		formatString: 0
+		lineageTag: abd2aa8f-887c-4832-aba5-497a8956741b
+		summarizeBy: sum
+		sourceColumn: purchases
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_revenue
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b441120-28ae-48b6-b9c0-173ec05dc50d
+		summarizeBy: sum
+		sourceColumn: total_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column acquisition_source
+		dataType: string
+		lineageTag: 920b6f62-32ff-4d5e-b8a5-2ec25e580959
+		summarizeBy: none
+		sourceColumn: acquisition_source
+
+		annotation SummarizationSetBy = Automatic
+
+	column acquisition_medium
+		dataType: string
+		lineageTag: 73df765a-2ad8-4f61-ac12-0855f9b0b1ab
+		summarizeBy: none
+		sourceColumn: acquisition_medium
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_device
+		dataType: string
+		lineageTag: b1fa2ee6-b7f8-4766-8b78-b83007965e94
+		summarizeBy: none
+		sourceColumn: first_device
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_country
+		dataType: string
+		lineageTag: a6d26ba3-2abe-43d1-ba7b-e4f53ba65d0a
+		summarizeBy: none
+		sourceColumn: first_country
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_order_value
+		dataType: double
+		lineageTag: c9747df0-1556-48eb-aecd-e774f0f60dc4
+		summarizeBy: sum
+		sourceColumn: avg_order_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition customer_360 = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\OLUWATOSIN OLUWASEUN\Downloads\customer-360-revenue-growth-analytics\powerbi\data\customer_360.csv"),[Delimiter=",", Columns=15, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"user_pseudo_id", type number}, {"first_seen_date", type date}, {"last_seen_date", type date}, {"total_events", Int64.Type}, {"sessions", Int64.Type}, {"product_views", Int64.Type}, {"add_to_carts", Int64.Type}, {"checkouts", Int64.Type}, {"purchases", Int64.Type}, {"total_revenue", Int64.Type}, {"acquisition_source", type text}, {"acquisition_medium", type text}, {"first_device", type text}, {"first_country", type text}, {"avg_order_value", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+

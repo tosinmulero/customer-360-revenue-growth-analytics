@@ -1,0 +1,137 @@
+cultureInfo en-GB
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "marketing_performance.campaign": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Marketing Performance",
+			          "ConceptualProperty": "Campaign"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Campaign": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "marketing_performance.total_marketing_spend": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Marketing Performance",
+			          "ConceptualProperty": "Total Marketing Spend"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Spend": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "marketing_performance.total_marketing_revenue": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Marketing Performance",
+			          "ConceptualProperty": "Total Marketing Revenue"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Revenue": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "marketing_performance.marketing_cpa": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Marketing Performance",
+			          "ConceptualProperty": "Marketing CPA"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "CPA": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "marketing_performance.marketing_roas": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Marketing Performance",
+			          "ConceptualProperty": "Marketing ROAS"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ROAS": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "marketing_performance.marketing_roi_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Marketing Performance",
+			          "ConceptualProperty": "Marketing ROI %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ROI": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

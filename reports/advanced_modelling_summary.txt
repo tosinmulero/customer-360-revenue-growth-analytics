@@ -1,0 +1,41 @@
+CUSTOMER 360 & REVENUE GROWTH ANALYTICS
+ADVANCED MODELLING REPORT
+=================================================================
+
+SECTION 1 - REAL GA4 REVENUE FORECAST
+-----------------------------------------------------------------
+Historical days analysed: 92
+Forecast horizon: 14 days
+Holdout MAE: 1,809.72
+Holdout RMSE: 2,278.03
+Forecast data source: REAL GA4 sample data
+
+SECTION 2 - SYNTHETIC A/B TEST
+-----------------------------------------------------------------
+IMPORTANT: Experiment observations are synthetic.
+GA4 baseline conversion used: 1.65%
+Control users: 20,000
+Control conversions: 322
+Control conversion rate: 1.61%
+Variant users: 20,000
+Variant conversions: 384
+Variant conversion rate: 1.92%
+Relative lift: 19.25%
+Z statistic: -2.3543
+P-value: 0.0186
+Result: Statistically significant
+
+SECTION 3 - SYNTHETIC MARKETING ROI
+-----------------------------------------------------------------
+IMPORTANT: Campaign spend data are synthetic.
+Total synthetic spend: 40,000.00
+Total synthetic revenue: 166,000.00
+Overall synthetic ROAS: 4.15x
+Highest ROAS campaign: Email Retargeting (16.00x)
+Lowest CPA campaign: Email Retargeting (3.57)
+
+METHODOLOGY DISCLOSURE
+-----------------------------------------------------------------
+Revenue forecasting uses real Google GA4 public sample e-commerce data.
+A/B testing observations are synthetic and are included only to demonstrate experimentation methods.
+Marketing spend, impressions, clicks and campaign metrics are synthetic and are included only to demonstrate CAC, CPA and ROAS analysis.

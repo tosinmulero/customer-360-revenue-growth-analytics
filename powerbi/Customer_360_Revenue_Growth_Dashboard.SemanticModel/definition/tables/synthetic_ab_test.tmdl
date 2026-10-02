@@ -1,0 +1,81 @@
+table synthetic_ab_test
+	lineageTag: 81dd6b1f-1935-49ab-9154-a15bc053c75f
+
+	measure 'Synthetic Control Conversion Rate' = DIVIDE(CALCULATE(MAX(synthetic_ab_test[conversion_rate_pct]), synthetic_ab_test[variant] = "Control"), 100)
+		formatString: 0.00%
+		lineageTag: f89586ea-99a9-4f5f-87ff-9c6e7aa6db80
+
+	measure 'Synthetic Variant Conversion Rate' = DIVIDE(CALCULATE(MAX(synthetic_ab_test[conversion_rate_pct]), synthetic_ab_test[variant] = "Variant"), 100)
+		formatString: 0.00%
+		lineageTag: 58f8c4b4-aade-428f-a157-41777d09bf7b
+
+	measure 'Synthetic Relative Lift %' = DIVIDE([Synthetic Variant Conversion Rate] - [Synthetic Control Conversion Rate], [Synthetic Control Conversion Rate])
+		formatString: 0.00%
+		lineageTag: 62af7f7b-3ec4-4899-88ce-f131fbf58809
+
+	measure 'Synthetic Experiment Users' = SUM(synthetic_ab_test[users])
+		formatString: 0
+		lineageTag: b6900814-82cd-40b0-9b83-b071edfd8860
+
+	measure 'Synthetic Experiment Conversions' = SUM(synthetic_ab_test[conversions])
+		formatString: 0
+		lineageTag: 54dd28f0-5373-438e-8a9b-c74eeac3140c
+
+	column variant
+		dataType: string
+		lineageTag: 375fe9b9-62b2-4ce0-b1ac-b41bbf779246
+		summarizeBy: none
+		sourceColumn: variant
+
+		annotation SummarizationSetBy = Automatic
+
+	column users
+		dataType: int64
+		formatString: 0
+		lineageTag: b9e5989a-44e6-4441-a022-afe486401fb1
+		summarizeBy: sum
+		sourceColumn: users
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversions
+		dataType: int64
+		formatString: 0
+		lineageTag: ae6be175-b182-4cc8-9c64-0c8f6f37b3ff
+		summarizeBy: sum
+		sourceColumn: conversions
+
+		annotation SummarizationSetBy = Automatic
+
+	column conversion_rate_pct
+		dataType: double
+		lineageTag: 6bc46cc7-4fa3-4409-a7bb-b5025989ff59
+		summarizeBy: sum
+		sourceColumn: conversion_rate_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column data_type
+		dataType: string
+		lineageTag: 1414ce7e-4033-4dad-ac9e-bc4d7d3f3b73
+		summarizeBy: none
+		sourceColumn: data_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition synthetic_ab_test = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\OLUWATOSIN OLUWASEUN\Downloads\customer-360-revenue-growth-analytics\powerbi\data\synthetic_ab_test.csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"variant", type text}, {"users", Int64.Type}, {"conversions", Int64.Type}, {"conversion_rate_pct", type number}, {"data_type", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

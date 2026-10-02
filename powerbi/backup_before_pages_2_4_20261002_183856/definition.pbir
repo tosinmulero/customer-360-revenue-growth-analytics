@@ -1,0 +1,8 @@
+{
+  "version": "4.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../Customer_360_Revenue_Growth_Dashboard.SemanticModel"
+    }
+  }
+}
