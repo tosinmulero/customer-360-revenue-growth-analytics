@@ -66,6 +66,8 @@ QA output is stored under:
 
 `reports/qa/`
 
+<!-- DASHBOARD_GALLERY_START -->
+
 ## Dashboard Pages
 
 - Executive Overview
@@ -76,7 +78,7 @@ QA output is stored under:
 
 ## Power BI Dashboard Gallery
 
-The following report pages belong to the Customer 360 & Revenue Growth Analytics project.
+These are the verified screenshots from the Customer 360 & Revenue Growth Analytics report.
 
 ### Executive Overview
 
@@ -97,6 +99,8 @@ The following report pages belong to the Customer 360 & Revenue Growth Analytics
 ### Marketing Performance
 
 ![Marketing Performance](images/powerbi/05_marketing_performance.png)
+
+<!-- DASHBOARD_GALLERY_END -->
 
 ## Author
 
