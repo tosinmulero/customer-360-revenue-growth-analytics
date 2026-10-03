@@ -74,6 +74,17 @@ QA output is stored under:
 
 `reports/qa/`
 
+
+<!-- DASHBOARD_GALLERY_START -->
+
+## Power BI Dashboard
+
+Below is the final Power BI dashboard from the Customer 360 & Revenue Growth Analytics project.
+
+![Customer 360 Power BI Dashboard](images/powerbi/powerbi_dashboard.png)
+
+<!-- DASHBOARD_GALLERY_END -->
+
 ## Author
 
 Oluwatosin Oluwaseun Mulero
