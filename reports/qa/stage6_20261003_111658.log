@@ -2,7 +2,7 @@
 [OK] PBIP: C:\Users\OLUWATOSIN OLUWASEUN\Downloads\customer-360-revenue-growth-analytics\powerbi\Customer_360_Revenue_Growth_Dashboard.pbip
 [OK] Report: C:\Users\OLUWATOSIN OLUWASEUN\Downloads\customer-360-revenue-growth-analytics\powerbi\Customer_360_Revenue_Growth_Dashboard.Report
 [OK] Semantic model: C:\Users\OLUWATOSIN OLUWASEUN\Downloads\customer-360-revenue-growth-analytics\powerbi\Customer_360_Revenue_Growth_Dashboard.SemanticModel
-[OK] Power BI JSON valid: 162 files
+[OK] Power BI JSON valid: 163 files
 [OK] Pages detected: 5
 [INFO] Page: Executive Overview
 [INFO] Page: Customer & Retention
@@ -21,9 +21,4 @@
 [OK] README dashboard gallery updated.
 [OK] git version 2.51.0.windows.1
 [OK] Git branch set to main.
-[INFO] GitHub CLI not found. Installing with winget.
-[WARNING] GitHub authentication did not complete: ! One-time code (955D-BDBF) copied to clipboard
-Open this URL to continue in your web browser: https://github.com/login/device
-failed to authenticate via web browser: context deadline exceeded
-[OK] Final Git commit created.
-[WARNING] Git working tree still contains changes.
+[OK] GitHub account: tosinmulero
