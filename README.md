@@ -6,14 +6,6 @@ Customer 360 & Revenue Growth Analytics is an end-to-end business intelligence p
 
 The solution uses Power BI Project (PBIP), PBIR report source, a TMDL semantic model, Python, SQL, DAX, Visual Studio Code and Git.
 
-## Dashboard Pages
-
-- Executive Overview
-- Customer & Retention
-- Acquisition & Product Performance
-- Forecasting & Experimentation
-- Marketing Performance
-
 ## Marketing Performance
 
 The Marketing Performance section uses synthetic campaign data for portfolio demonstration.
@@ -74,15 +66,37 @@ QA output is stored under:
 
 `reports/qa/`
 
-<!-- DASHBOARD_GALLERY_START -->
+## Dashboard Pages
 
-## Power BI Dashboard
+- Executive Overview
+- Customer & Retention
+- Acquisition & Product Performance
+- Forecasting & Experimentation
+- Marketing Performance
 
-Below is the final Power BI dashboard from the Customer 360 & Revenue Growth Analytics project.
+## Power BI Dashboard Gallery
 
-![Customer 360 Power BI Dashboard](images/powerbi/powerbi_dashboard.png)
+The five report pages below form the complete Customer 360 & Revenue Growth Analytics dashboard.
 
-<!-- DASHBOARD_GALLERY_END -->
+### Executive Overview
+
+![Executive Overview](images/powerbi/01_executive_overview.png)
+
+### Customer & Retention
+
+![Customer & Retention](images/powerbi/02_customer_retention.png)
+
+### Acquisition & Product Performance
+
+![Acquisition & Product Performance](images/powerbi/03_acquisition_product_performance.png)
+
+### Forecasting & Experimentation
+
+![Forecasting & Experimentation](images/powerbi/04_forecasting_experimentation.png)
+
+### Marketing Performance
+
+![Marketing Performance](images/powerbi/05_marketing_performance.png)
 
 ## Author
 
