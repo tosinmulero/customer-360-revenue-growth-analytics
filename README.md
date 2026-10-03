@@ -74,7 +74,6 @@ QA output is stored under:
 
 `reports/qa/`
 
-
 <!-- DASHBOARD_GALLERY_START -->
 
 ## Power BI Dashboard
