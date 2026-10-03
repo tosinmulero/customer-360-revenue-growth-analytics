@@ -16,12 +16,6 @@
 - [x] VS Code workspace tasks created
 - [x] Git repository prepared
 
-## Screenshots
-
-Screenshots are stored under:
-
-`images/powerbi/`
-
 ## GitHub
 
 The repository is prepared and published using GitHub CLI from the VS Code terminal.

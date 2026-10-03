@@ -27,16 +27,16 @@ GIT WORKING TREE CLEAN:
 False
 
 GITHUB ACCOUNT:
-NOT AUTHENTICATED
+tosinmulero
 
 GITHUB REMOTE:
-NOT CONFIGURED
+https://github.com/tosinmulero/customer-360-revenue-growth-analytics.git
 
 REPOSITORY VISIBILITY:
-N/A
+private
 
 WARNINGS:
-2
+1
 
 ERRORS:
 0

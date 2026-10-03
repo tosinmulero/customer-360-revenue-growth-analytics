@@ -74,32 +74,6 @@ QA output is stored under:
 
 `reports/qa/`
 
-<!-- DASHBOARD_GALLERY_START -->
-
-## Dashboard Gallery
-
-### 01 Executive Overview
-
-![01 Executive Overview](images/powerbi/01_executive_overview.png)
-
-### 02 Customer Retention
-
-![02 Customer Retention](images/powerbi/02_customer_retention.png)
-
-### 03 Acquisition Product Performance
-
-![03 Acquisition Product Performance](images/powerbi/03_acquisition_product_performance.png)
-
-### 04 Forecasting Experimentation
-
-![04 Forecasting Experimentation](images/powerbi/04_forecasting_experimentation.png)
-
-### 05 Marketing Performance
-
-![05 Marketing Performance](images/powerbi/05_marketing_performance.png)
-
-<!-- DASHBOARD_GALLERY_END -->
-
 ## Author
 
 Oluwatosin Oluwaseun Mulero
