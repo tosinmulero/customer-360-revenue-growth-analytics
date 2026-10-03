@@ -76,7 +76,7 @@ QA output is stored under:
 
 ## Power BI Dashboard Gallery
 
-The five report pages below form the complete Customer 360 & Revenue Growth Analytics dashboard.
+The following report pages belong to the Customer 360 & Revenue Growth Analytics project.
 
 ### Executive Overview
 
