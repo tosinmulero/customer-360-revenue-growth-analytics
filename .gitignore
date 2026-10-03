@@ -1,5 +1,6 @@
 .pbi/
 **/.pbi/
+
 *.abf
 *.tmp
 *.lock
@@ -12,6 +13,13 @@ __pycache__/
 .vscode/
 backups/
 reports/qa/
+
+powerbi/backup_*/
+powerbi/recovery_backup_*/
+powerbi/tmdl_repair_archive/
+powerbi/*recovery*.txt
+powerbi/dashboard_build_manifest.txt
+powerbi/build_remaining_dashboard_pages.py
 
 .DS_Store
 Thumbs.db

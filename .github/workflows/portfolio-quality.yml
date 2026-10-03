@@ -1,0 +1,99 @@
+name: Portfolio Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate Python syntax
+        run: |
+          python -m py_compile notebooks/01_customer_360_python_analysis.py
+          python -m py_compile notebooks/02_advanced_modelling.py
+          python -m py_compile customer360_FINAL_BUILD.py
+
+      - name: Validate required portfolio assets
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          required = [
+              Path("README.md"),
+              Path("requirements.txt"),
+              Path("docs/TECHNICAL_ARCHITECTURE.md"),
+              Path("reports/python_analysis_summary.txt"),
+              Path("reports/advanced_modelling_summary.txt"),
+              Path("powerbi/Customer_360_Revenue_Growth_Dashboard.pbip"),
+              Path("images/powerbi/01_executive_overview.png"),
+              Path("images/powerbi/02_customer_retention.png"),
+              Path("images/powerbi/03_acquisition_product_performance.png"),
+              Path("images/powerbi/04_forecasting_experimentation.png"),
+              Path("images/powerbi/05_marketing_performance.png"),
+          ]
+
+          missing = [str(path) for path in required if not path.exists()]
+          if missing:
+              raise SystemExit("Missing required assets: " + ", ".join(missing))
+
+          readme = Path("README.md").read_text(encoding="utf-8")
+          required_sections = [
+              "## Executive Snapshot",
+              "## Business Problem",
+              "## Analytical Architecture",
+              "## Dashboard Gallery",
+              "## Revenue Forecasting",
+              "## Synthetic A/B Experiment",
+              "## Power BI Engineering",
+              "## Engineering & Quality Controls",
+              "## Methodology & Limitations",
+          ]
+
+          absent = [section for section in required_sections if section not in readme]
+          if absent:
+              raise SystemExit("README missing sections: " + ", ".join(absent))
+
+          forbidden = [
+              "/mnt/data",
+              "customer360_FORCE_CORRECT_GALLERY",
+              "force_fix_gallery.py",
+          ]
+
+          scan_ext = {".py", ".md", ".txt", ".json", ".sql", ".tmdl"}
+          hits = []
+
+          for path in Path(".").rglob("*"):
+              if not path.is_file():
+                  continue
+              if ".git" in path.parts:
+                  continue
+              if path.suffix.lower() not in scan_ext:
+                  continue
+              try:
+                  text = path.read_text(encoding="utf-8-sig")
+              except Exception:
+                  continue
+              for marker in forbidden:
+                  if marker in text:
+                      hits.append(f"{path}: {marker}")
+
+          if hits:
+              raise SystemExit("Forbidden build contamination found: " + " | ".join(hits))
+
+          print("Portfolio structure validation passed.")
+          PY

@@ -1,8 +1,0 @@
-{
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
-  "name": "69f9a64154f448c28bf5",
-  "displayName": "Forecasting & Experimentation",
-  "displayOption": "FitToPage",
-  "height": 1080,
-  "width": 1920
-}
