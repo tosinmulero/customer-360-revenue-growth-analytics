@@ -795,6 +795,3 @@ print(
     f"Report saved to: "
     f"{report_path}"
 )
-
-from pathlib import Path
-import zipfile
